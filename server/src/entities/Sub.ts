@@ -1,9 +1,10 @@
 import { User } from './User';
-import { Column, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import BaseEntity from './Entity';
 import { Post } from './Post';
 import { Expose } from 'class-transformer';
 
+@Entity('subs')
 export class Sub extends BaseEntity {
   @Index()
   @Column({ unique: true })

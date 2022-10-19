@@ -1,12 +1,13 @@
 import { Vote } from './Vote';
 import { User } from './User';
-import { BeforeInsert, Column, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { BeforeInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import BaseEntity from './Entity';
 import { Sub } from './Sub';
 import { Exclude, Expose } from 'class-transformer';
 import { Comment } from './Comment';
 import { makeId, slugify } from '../utils/helpers';
 
+@Entity('posts')
 export class Post extends BaseEntity {
   @Index()
   @Column()
