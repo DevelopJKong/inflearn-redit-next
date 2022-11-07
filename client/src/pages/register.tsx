@@ -1,22 +1,48 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
-const Container = styled.div.attrs(() => {
-  return {
-    className: 'bg-white',
-  };
-})``;
+const Container = styled.div`
+  ${tw`bg-white`}
+`;
 
-const Content = styled.div.attrs(() => {
-  return {
-    className: 'flex flex-col items-center justify-center h-screen p-6',
-  };
-})``;
+const ContentWrapper = styled.div`
+  ${tw`flex flex-col items-center justify-center h-screen p-6`}
+`;
+
+const Content = styled.div`
+  ${tw`w-10/12 mx-auto md:w-96`}
+`;
+
+const Title = styled.h1`
+  ${tw`mb-2 text-lg font-medium`}
+`;
+const Form = styled.form``;
+const Button = styled.button`
+  ${tw`w-full py-2 mb-1 text-xs font-bold text-white uppercase bg-gray-400 border border-gray-400 rounded`}
+`;
+const SmallText = styled.small``;
+
+const LinkTag = styled.a`
+  ${tw`ml-1 text-blue-500 uppercase`}
+`;
 
 const register = () => {
   return (
     <Container>
-      <Content>hello</Content>
+      <ContentWrapper>
+        <Content>
+          <Title>회원가입</Title>
+          <Form>
+            <Button>회원가입</Button>
+          </Form>
+          <SmallText>
+            이미 가입 하셨나요?
+            <Link href={'/login'}>로그인</Link>
+          </SmallText>
+        </Content>
+      </ContentWrapper>
     </Container>
   );
 };
