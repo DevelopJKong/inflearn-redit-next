@@ -18,14 +18,14 @@ const Container = styled.div.attrs(({ className }) => {
   };
 })``;
 
-const Input = styled.div.attrs(({ className, type }) => {
-  return {
-    type,
-    className,
-  };
-})`
-  ${({ style }) => style}
-`;
+const Input = styled.div.attrs<{ className?: string; type?: string; style?: object }>(
+  ({ className, type }) => {
+    return {
+      type,
+      className,
+    };
+  },
+)<{ className?: string; type?: string; style?: object }>``;
 
 const SmallText = styled.small.attrs(({ className }) => {
   return {
@@ -53,7 +53,7 @@ const InputGroup: React.FC<InputGroupProps> = ({
         )}
         style={{ minWidth: 300 }}
         placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
       />
       <SmallText className='font-medium text-red-500'>{error}</SmallText>
     </Container>
