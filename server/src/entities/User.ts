@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, BeforeInsert } from 'typeorm';
-import { IsEmail, Length } from 'class-validator';
+import { IsEmail, IsNumber, IsString, Length } from 'class-validator';
 import bcrypt from 'bcryptjs';
 import { Post } from './Post';
 import { Vote } from './Vote';
@@ -19,6 +19,18 @@ export class User {
   @Length(3, 32, { message: '사용자 이름은 3자 이상이어야 합니다' })
   @Column({ unique: true })
   username: string;
+
+  @Column()
+  @IsString()
+  firstName: string;
+
+  @Column()
+  @IsString()
+  lastName: string;
+
+  @Column()
+  @IsNumber()
+  age: number;
 
   @Column()
   @Length(6, 255, { message: '비밀번호는 6자리 이상이어야 합니다' })

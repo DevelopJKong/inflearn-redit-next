@@ -1,4 +1,4 @@
-export const slugify = function (str:string) {
+export const slugify = function (str: string) {
   str = str.replace(/^\s+|\s+$/g, ''); // trim
   str = str.toLowerCase();
 
@@ -17,7 +17,7 @@ export const slugify = function (str:string) {
   return str;
 };
 
-export function makeId(length:number) {
+export function makeId(length: number) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
