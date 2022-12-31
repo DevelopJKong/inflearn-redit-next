@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import InputGroup from '../components/InputGroup';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Container = styled.div`
    ${tw`bg-white`}
@@ -34,13 +36,31 @@ const Register = () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [errors, setErrors] = useState<any>({});
+   const router = useRouter();
+
+   const handleSubmit = async (event: FormEvent) => {
+      event.preventDefault();
+      try {
+         const res = await axios.post('/auth/register', {
+            email,
+            password,
+            username,
+         });
+
+         console.log(res);
+         router.push('/login');
+      } catch (error: any) {
+         console.log('error', error);
+         setErrors(error?.response?.data || {});
+      }
+   };
 
    return (
       <Container>
          <ContentWrapper>
             <Content>
                <Title>회원가입</Title>
-               <Form>
+               <Form onSubmit={handleSubmit}>
                   <InputGroup placeholder='Email' type='email' value={email} setValue={setEmail} error={errors.email} />
                   <InputGroup
                      placeholder='Username'

@@ -2,28 +2,29 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import BaseEntity from './Entity';
 import { Post } from './Post';
 import { User } from './User';
+import { Comment } from './Comment';
 
 @Entity('votes')
 export class Vote extends BaseEntity {
-  @Column()
-  value: number;
+   @Column('int')
+   value: number;
 
-  @Column()
-  username: string;
+   @Column('varchar')
+   username: string;
 
-  @Column({ nullable: true })
-  postId: number;
+   @Column('int', { nullable: true })
+   postId: number;
 
-  @ManyToOne((type) => Post, (post) => post.votes)
-  post: Post;
+   @ManyToOne((_type) => Post, (post) => post.votes)
+   post: Post;
 
-  @ManyToOne((type) => User, (user) => user.votes)
-  @JoinColumn({ name: 'username', referencedColumnName: 'username' })
-  user: User;
+   @ManyToOne((_type) => User, (user) => user.votes)
+   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
+   user: User;
 
-  @Column({ nullable: true })
-  commentId: number;
+   @Column('int', { nullable: true })
+   commentId: number;
 
-  @ManyToOne((type) => Comment)
-  comment: Comment;
+   @ManyToOne((_type) => Comment)
+   comment: Comment;
 }
