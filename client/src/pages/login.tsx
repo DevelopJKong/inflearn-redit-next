@@ -3,12 +3,15 @@ import { Button, Container, ContentWrapper, Form, LinkTag, SmallText, Title } fr
 import InputGroup from '../components/InputGroup';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { MAP_TYPE_KEY, useAuthDispatch } from '../context/auth';
 
 const Login = () => {
    let router = useRouter();
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [errors, setErrors] = useState<any>({});
+
+   const dispatch = useAuthDispatch();
 
    const handleSubmit = async (event: FormEvent) => {
       event.preventDefault();
@@ -24,7 +27,9 @@ const Login = () => {
             },
          );
 
+         dispatch(MAP_TYPE_KEY.LOGIN, data?.user);
          console.log(data);
+         router.push('/');
       } catch (error: any) {
          console.log(error);
          setErrors(error?.response?.data || {});
