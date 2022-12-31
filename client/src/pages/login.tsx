@@ -13,7 +13,7 @@ const Login = () => {
    const handleSubmit = async (event: FormEvent) => {
       event.preventDefault();
       try {
-         const res = await axios.post(
+         const { data } = await axios.post(
             '/auth/login',
             {
                username,
@@ -23,6 +23,8 @@ const Login = () => {
                withCredentials: true,
             },
          );
+
+         console.log(data);
       } catch (error: any) {
          console.log(error);
          setErrors(error?.response?.data || {});
@@ -34,8 +36,14 @@ const Login = () => {
          <ContentWrapper>
             <Title>로그인</Title>
             <Form onSubmit={handleSubmit}>
-               <InputGroup placeholder='Username' value={username} setValue={setUsername} error={errors.username} />
-               <InputGroup placeholder='Password' value={password} setValue={setPassword} error={errors.password} />
+               <InputGroup placeholder='Username' type={'text'} value={username} setValue={setUsername} error={errors.username} />
+               <InputGroup
+                  placeholder='Password'
+                  type={'password'}
+                  value={password}
+                  setValue={setPassword}
+                  error={errors.password}
+               />
                <Button>로그인</Button>
             </Form>
             <SmallText>
