@@ -6,28 +6,30 @@ import InputGroup from '../components/InputGroup';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const Container = styled.div`
+export const Container = styled.div`
    ${tw`bg-white`}
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
    ${tw`flex flex-col items-center justify-center h-screen p-6`}
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
    ${tw`w-10/12 mx-auto md:w-96`}
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
    ${tw`mb-2 text-lg font-medium`}
 `;
-const Form = styled.form``;
-const Button = styled.button`
+
+export const Form = styled.form``;
+
+export const Button = styled.button`
    ${tw`w-full py-2 mb-1 text-xs font-bold text-white uppercase bg-gray-400 border border-gray-400 rounded`}
 `;
-const SmallText = styled.small``;
+export const SmallText = styled.small``;
 
-const LinkTag = styled(Link)`
+export const LinkTag = styled(Link)`
    ${tw`ml-1 text-blue-500 uppercase`}
 `;
 
