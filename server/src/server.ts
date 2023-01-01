@@ -1,9 +1,10 @@
-import "dotenv/config";
+import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import authRouter from './routes/authRouter';
 import { appDataSource } from './data-source';
+import subsRouter from './routes/subsRouter';
 
 const app = express();
 const origin = 'http://localhost:3000';
@@ -13,7 +14,11 @@ app.use(morgan('dev'));
 app.use(cors({ origin, credentials: true }));
 app.get('/', (_, res) => res.send('running'));
 app.use('/api/auth', authRouter);
-
+app.use('/api/subs', subsRouter);
+app.use((req, res, next) => {
+   console.log('hello');
+   next();
+});
 
 app.listen(process.env.PORT, async () => {
    console.log(`Server running at http://localhost:${process.env.PORT}`);
