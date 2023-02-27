@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import jwt from "jsonwebtoken";
-import { appDataSource } from "../data-source";
+import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -9,7 +9,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     const { username } = jwt.verify(token, process.env.JWT_SECRET!) as { username: string };
 
-    const users = appDataSource.getRepository(User);
+    const users = AppDataSource.getRepository(User);
     const user = await users.findOneBy({ username });
 
     if (!user) throw new Error("Unauthenticated");
@@ -17,6 +17,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     // ! 유저 정보를 res.locals.user에 넣어주기
 
     res.locals.user = user;
+    return next();
   } catch (error) {
     console.log(error);
     return res.status(400).json({ error: "Something went wrong" });
